@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Autocomplete from "../components/Autocomplete";
+import YouTubePlayer from "../components/YoutubePlayer";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -10,9 +11,15 @@ const StyledContainer = styled.div`
 
 function Home() {
   const [selectedData, setSelectedData] = useState(null);
-  console.log(selectedData);
+  const [selectedTrack, setSelectedTrack] = useState(null);
+
   const handleSelect = (item) => {
     setSelectedData(item);
+    setSelectedTrack(null);
+  };
+
+  const handleTrackClick = (trackTitle) => {
+    setSelectedTrack(trackTitle);
   };
 
   return (
@@ -30,7 +37,11 @@ function Home() {
                     <strong>{album.title}</strong> ({album.year})
                     <ul>
                       {album.songs.map((song, idx) => (
-                        <li key={idx}>
+                        <li
+                          key={idx}
+                          onClick={() => handleTrackClick(song.title)}
+                          style={{ cursor: "pointer" }}
+                        >
                           {song.title} - {song.length}
                         </li>
                       ))}
@@ -45,7 +56,11 @@ function Home() {
               <h2>{selectedData.title}</h2>
               <ul>
                 {selectedData.songs.map((song, index) => (
-                  <li key={index}>
+                  <li
+                    key={index}
+                    onClick={() => handleTrackClick(song.title)}
+                    style={{ cursor: "pointer" }}
+                  >
                     {song.title} - {song.length}
                   </li>
                 ))}
@@ -54,12 +69,18 @@ function Home() {
           )}
           {selectedData.type === "song" && (
             <div>
-              <h2>{selectedData.title}</h2>
+              <h2
+                onClick={() => handleTrackClick(selectedData.title)}
+                style={{ cursor: "pointer" }}
+              >
+                {selectedData.title}
+              </h2>
               <p>Length: {selectedData.length}</p>
             </div>
           )}
         </StyledContainer>
       )}
+      {selectedTrack && <YouTubePlayer trackTitle={selectedTrack} />}
     </div>
   );
 }
