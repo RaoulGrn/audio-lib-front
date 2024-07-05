@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import Autocomplete from "../components/Autocomplete";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -9,47 +9,57 @@ const StyledContainer = styled.div`
 `;
 
 function Home() {
-  const [data, setData] = useState([]);
-
-  const fetchData = () => {
-    axios
-      .get("http://localhost:3000/artists")
-      .then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data:", error);
-      });
+  const [selectedData, setSelectedData] = useState(null);
+  console.log(selectedData);
+  const handleSelect = (item) => {
+    setSelectedData(item);
   };
 
   return (
     <div>
       <h1>HOME</h1>
-      <button onClick={fetchData}>Fetch Artists</button>
-      <StyledContainer>
-        <ul>
-          {data.map((artist, index) => (
-            <li key={index}>{artist.name}</li>
-          ))}
-        </ul>
-        <ul>
-          {data.map((artist, index) =>
-            artist.albums.map((album, index) => (
-              <li key={index}>{album.title}</li>
-            ))
+      <Autocomplete onSelect={handleSelect} />
+      {selectedData && (
+        <StyledContainer>
+          {selectedData.type === "artist" && (
+            <div>
+              <h2>{selectedData.name}</h2>
+              <ul>
+                {selectedData.albums.map((album, index) => (
+                  <li key={index}>
+                    <strong>{album.title}</strong> ({album.year})
+                    <ul>
+                      {album.songs.map((song, idx) => (
+                        <li key={idx}>
+                          {song.title} - {song.length}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
-        </ul>
-        <ul>
-          {data.map((artist, index) =>
-            artist.albums.map((album, index) =>
-              album.songs.map((song, index) => (
-                <li key={index}>{song.title}</li>
-              ))
-            )
+          {selectedData.type === "album" && (
+            <div>
+              <h2>{selectedData.title}</h2>
+              <ul>
+                {selectedData.songs.map((song, index) => (
+                  <li key={index}>
+                    {song.title} - {song.length}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
-        </ul>
-      </StyledContainer>
+          {selectedData.type === "song" && (
+            <div>
+              <h2>{selectedData.title}</h2>
+              <p>Length: {selectedData.length}</p>
+            </div>
+          )}
+        </StyledContainer>
+      )}
     </div>
   );
 }
