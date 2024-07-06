@@ -21,6 +21,7 @@ const Main = styled.main`
 `;
 
 const Container = styled.div`
+  height: 100vh;
   max-width: 120rem;
   margin: 0 auto;
   display: flex;

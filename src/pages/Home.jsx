@@ -48,6 +48,15 @@ const TextContainer2 = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
+const TextContainer3 = styled.div`
+  margin-top: 1.6rem;
+  padding: 1.2rem;
+  width: 100%;
+  background-color: #265c42;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
 function Home() {
   const [selectedData, setSelectedData] = useState(null);
   const [selectedTrack, setSelectedTrack] = useState(null);
@@ -125,19 +134,19 @@ function Home() {
             </TextContainer>
           )}
           {selectedData.type === "song" && (
-            <TextContainer>
+            <TextContainer3>
               <h2
                 onClick={() =>
                   handleTrackClick(selectedData.title, selectedData.artist)
                 }
                 style={{ cursor: "pointer" }}
               >
-                {selectedData.title}
+                Track Name: {selectedData.title}
               </h2>
               <p>Artist: {selectedData.artist}</p>
               <p>Album: {selectedData.album}</p>
               <p>Length: {selectedData.length}</p>
-            </TextContainer>
+            </TextContainer3>
           )}
         </StyledContainer>
       )}
