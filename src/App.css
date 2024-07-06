@@ -1,0 +1,12 @@
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--color-grey-700);
+  background-image: url("./assets/images/music.jpg"); /* Corrected path */
+  background-size: cover;
+  background-position: center;
+  opacity: 90%; /* Apply opacity to the entire background */
+  transition: color 0.3s, background-color 0.3s;
+  min-height: 100vh;
+  line-height: 1.5;
+  font-size: 1.6rem;
+}

@@ -5,10 +5,13 @@ import Header from "./Header";
 
 const StyledAppLayout = styled.div`
   display: grid;
-  grid-template-columns: 26rem 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
-  background-color: var(--color-grey-50);
+
+  @media (min-width: 768px) {
+    grid-template-columns: 26rem 1fr;
+  }
 `;
 
 const Main = styled.main`
