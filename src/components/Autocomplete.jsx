@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import debounce from "lodash.debounce";
+import { useAuthContext } from "../utils/AuthContext";
 
 const StyledSearchContainer = styled.div`
   position: relative;
@@ -69,8 +70,12 @@ function Autocomplete({ onSelect }) {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { user, token } = useAuthContext();
+  console.log(token);
 
-  // Sanitize input to prevent injection attacks
+  const tokenString = token?.token || "";
+  console.log("TokenString " + tokenString);
+
   const sanitizeInput = (input) => {
     return input.replace(/[^\w\s]/gi, "");
   };
@@ -84,7 +89,12 @@ function Autocomplete({ onSelect }) {
         try {
           const sanitizedValue = sanitizeInput(value);
           const artistsResponse = await axios.get(
-            `http://localhost:3000/artists`
+            `http://localhost:3000/artists`,
+            {
+              headers: {
+                Authorization: `Bearer ${tokenString}`,
+              },
+            }
           );
 
           const suggestions = [];
@@ -126,7 +136,10 @@ function Autocomplete({ onSelect }) {
 
           setSuggestions(suggestions);
         } catch (error) {
-          console.error("Error fetching suggestions:", error);
+          console.error(
+            "Error fetching suggestions:",
+            error.response || error.message || error
+          );
           setError(
             "An error occurred while fetching suggestions. Please try again."
           );
@@ -137,8 +150,9 @@ function Autocomplete({ onSelect }) {
         setSuggestions([]);
       }
     }, 300),
-    []
+    [token]
   );
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);

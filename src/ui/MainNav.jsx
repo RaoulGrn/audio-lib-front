@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { CgMusicSpeaker } from "react-icons/cg";
+import { IoLogOutOutline } from "react-icons/io5";
+import { useAuthContext } from "../utils/AuthContext";
 
 const NavList = styled.ul`
   display: flex;
@@ -47,14 +49,29 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 function MainNav() {
+  const { user, logout } = useAuthContext();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <nav>
       <NavList>
         <li>
-          <StyledNavLink to="/">
-            <CgMusicSpeaker style={{ color: "lightgreen" }} />
-            <span>Home</span>
-          </StyledNavLink>
+          {user && (
+            <>
+              <StyledNavLink to="/">
+                <CgMusicSpeaker style={{ color: "lightgreen" }} />
+                <span>Home</span>
+              </StyledNavLink>
+
+              <StyledNavLink className="mt-4" onClick={handleLogout}>
+                <IoLogOutOutline style={{ color: "red" }} />
+                <span>Logout</span>
+              </StyledNavLink>
+            </>
+          )}
         </li>
       </NavList>
     </nav>

@@ -83,7 +83,7 @@ function Home() {
     <div>
       <Autocomplete onSelect={handleSelect} />
       {selectedData && (
-        <StyledContainer>
+        <StyledContainer className="text-gray-300">
           {selectedData.type === "artist" && (
             <TextContainer>
               <h2>{selectedData.name}</h2>
