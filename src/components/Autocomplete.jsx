@@ -5,14 +5,24 @@ import debounce from "lodash.debounce";
 
 const StyledSearchContainer = styled.div`
   position: relative;
-  width: 300px;
+  width: 100%;
+  color: #123524;
+  margin: 1rem 0;
 `;
 
 const StyledInput = styled.input`
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #123524;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 2rem;
+  outline: none;
+  margin-bottom: 2rem;
+
+  &:focus {
+    border-color: #dbad13;
+  }
 `;
 
 const StyledSuggestionsList = styled.ul`
@@ -21,21 +31,37 @@ const StyledSuggestionsList = styled.ul`
   left: 0;
   width: 100%;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: white;
   max-height: 200px;
   overflow-y: auto;
   list-style: none;
   padding: 0;
   margin: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 `;
 
 const StyledSuggestionItem = styled.li`
   padding: 0.8rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+
   &:hover {
     background-color: #f0f0f0;
   }
+`;
+
+const LoadingMessage = styled.p`
+  margin: 0.5rem 0;
+  color: #007bff;
+  font-size: 0.9rem;
+`;
+
+const ErrorMessage = styled.p`
+  margin: 0.5rem 0;
+  color: red;
+  font-size: 0.9rem;
 `;
 
 function Autocomplete({ onSelect }) {
@@ -57,38 +83,48 @@ function Autocomplete({ onSelect }) {
 
         try {
           const sanitizedValue = sanitizeInput(value);
-          const [artistsResponse, albumsResponse, songsResponse] =
-            await Promise.all([
-              axios.get(
-                `http://localhost:3000/artists/search?name=${sanitizedValue}`
-              ),
-              axios.get(
-                `http://localhost:3000/albums/search?title=${sanitizedValue}`
-              ),
-              axios.get(
-                `http://localhost:3000/songs/search?title=${sanitizedValue}`
-              ),
-            ]);
+          const artistsResponse = await axios.get(
+            `http://localhost:3000/artists`
+          );
 
-          const uniqueSuggestions = new Map();
+          const suggestions = [];
 
           artistsResponse.data.forEach((artist) => {
-            uniqueSuggestions.set(artist.name, { type: "artist", ...artist });
-          });
-
-          albumsResponse.data.forEach((album) => {
-            if (!uniqueSuggestions.has(album.title)) {
-              uniqueSuggestions.set(album.title, { type: "album", ...album });
+            if (
+              artist.name.toLowerCase().includes(sanitizedValue.toLowerCase())
+            ) {
+              suggestions.push({ ...artist, type: "artist" });
             }
+
+            artist.albums.forEach((album) => {
+              if (
+                album.title.toLowerCase().includes(sanitizedValue.toLowerCase())
+              ) {
+                suggestions.push({
+                  ...album,
+                  type: "album",
+                  artist: artist.name,
+                });
+              }
+
+              album.songs.forEach((song) => {
+                if (
+                  song.title
+                    .toLowerCase()
+                    .includes(sanitizedValue.toLowerCase())
+                ) {
+                  suggestions.push({
+                    ...song,
+                    type: "song",
+                    artist: artist.name,
+                    album: album.title,
+                  });
+                }
+              });
+            });
           });
 
-          songsResponse.data.forEach((song) => {
-            if (!uniqueSuggestions.has(song.title)) {
-              uniqueSuggestions.set(song.title, { type: "song", ...song });
-            }
-          });
-
-          setSuggestions(Array.from(uniqueSuggestions.values()));
+          setSuggestions(suggestions);
         } catch (error) {
           console.error("Error fetching suggestions:", error);
           setError(
@@ -103,7 +139,6 @@ function Autocomplete({ onSelect }) {
     }, 300),
     []
   );
-
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
@@ -124,8 +159,8 @@ function Autocomplete({ onSelect }) {
         onChange={handleInputChange}
         placeholder="Search artists, albums, or songs..."
       />
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {loading && <LoadingMessage>Loading...</LoadingMessage>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       {suggestions.length > 0 && (
         <StyledSuggestionsList>
           {suggestions.map((suggestion, index) => (
@@ -134,6 +169,7 @@ function Autocomplete({ onSelect }) {
               onClick={() => handleSuggestionClick(suggestion)}
             >
               {suggestion.name || suggestion.title} ({suggestion.type})
+              {suggestion.type === "song" && ` - ${suggestion.artist}`}
             </StyledSuggestionItem>
           ))}
         </StyledSuggestionsList>
