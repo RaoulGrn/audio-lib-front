@@ -1,7 +1,30 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
-const YouTubePlayer = ({ trackTitle }) => {
+const StyledIframe = styled.iframe`
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+`;
+
+const YouTubePlayerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+`;
+
+const YouTubePlayer = ({ trackTitle, artistName }) => {
   const [videoId, setVideoId] = useState(null);
 
   useEffect(() => {
@@ -12,7 +35,7 @@ const YouTubePlayer = ({ trackTitle }) => {
           {
             params: {
               part: "snippet",
-              q: `${trackTitle} official audio`,
+              q: `${trackTitle} - ${artistName} official audio`,
               type: "video",
               key: import.meta.env.VITE_YOUTUBE_API_KEY,
             },
@@ -34,15 +57,14 @@ const YouTubePlayer = ({ trackTitle }) => {
   if (!videoId) return null;
 
   return (
-    <iframe
-      width="560"
-      height="315"
-      src={`https://www.youtube.com/embed/${videoId}`}
-      frameBorder="0"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      title="YouTube video player"
-    ></iframe>
+    <YouTubePlayerContainer>
+      <StyledIframe
+        src={`https://www.youtube.com/embed/${videoId}`}
+        allow="autoplay; encrypted-media"
+        allowFullScreen
+        title="YouTube video player"
+      ></StyledIframe>
+    </YouTubePlayerContainer>
   );
 };
 

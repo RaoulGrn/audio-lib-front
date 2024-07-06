@@ -7,7 +7,9 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
-  return <StyledHeader>HEADER</StyledHeader>;
+  return (
+    <StyledHeader>Click on a track name to play it on youtube!</StyledHeader>
+  );
 }
 
 export default Header;

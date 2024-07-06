@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { HiOutlineHome } from "react-icons/hi2";
+import { CgMusicSpeaker } from "react-icons/cg";
 
 const NavList = styled.ul`
   display: flex;
@@ -27,7 +27,7 @@ const StyledNavLink = styled(NavLink)`
   &.active:link,
   &.active:visited {
     color: var(--color-grey-800);
-    background-color: var(--color-grey-50);
+    background-color: var(--color-grey-300);
     border-radius: var(--border-radius-sm);
   }
 
@@ -52,7 +52,7 @@ function MainNav() {
       <NavList>
         <li>
           <StyledNavLink to="/">
-            <HiOutlineHome />
+            <CgMusicSpeaker style={{ color: "lightgreen" }} />
             <span>Home</span>
           </StyledNavLink>
         </li>

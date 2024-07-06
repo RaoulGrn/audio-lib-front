@@ -13,17 +13,17 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-900: #312e81;
 
 
-  --color-grey-0: #fff;
-  --color-grey-50: #f9fafb;
-  --color-grey-100: #f3f4f6;
-  --color-grey-200: #e5e7eb;
-  --color-grey-300: #d1d5db;
-  --color-grey-400: #9ca3af;
-  --color-grey-500: #6b7280;
-  --color-grey-600: #4b5563;
-  --color-grey-700: #374151;
-  --color-grey-800: #1f2937;
-  --color-grey-900: #111827;
+  --color-grey-0: #000000;   
+--color-grey-50: #010503;     
+--color-grey-100: #030a07;     
+--color-grey-200: #050f0a;     
+--color-grey-300: #07150e;    
+--color-grey-400: #091a12;    
+--color-grey-500: #0a1f15;  
+--color-grey-600: #0c2519;   
+--color-grey-700: #e5e7eb;     
+--color-grey-800: #e5e7eb;    
+--color-grey-900: #123524;    
 
   --color-blue-100: #e0f2fe;
   --color-blue-700: #0369a1;
