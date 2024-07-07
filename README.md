@@ -39,7 +39,7 @@ $ npm run dev
 
 # Features 
 
-## Public page which you can access and from where users can choose to register or login
+## Public page (unprotected route) where users can choose to register or login
 
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/da271b6c-25f9-4cd1-9f7b-7291e225386f" width="100%" height="100%">
 
