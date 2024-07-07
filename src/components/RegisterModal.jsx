@@ -1,11 +1,53 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import PasswordChecklist from "react-password-checklist";
 import axios from "axios";
+import styled from "styled-components";
+import toast from "react-hot-toast";
+
+const ModalBody = styled(Modal.Body)`
+  background-image: linear-gradient(#123524, #050f0a);
+  padding: 2rem;
+  border-radius: 20px;
+`;
+
+const StyledContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+`;
+
+const InputField = styled.input`
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  box-sizing: border-box;
+`;
+
+const SubmitButton = styled(Button)`
+  width: 180px;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-right: 1rem;
+`;
+
+const CancelButton = styled(Button)`
+  width: 180px;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+`;
 
 const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
   const [formValue, setFormValue] = useState({
-    name: "",
     email: "",
     username: "",
     password: "",
@@ -29,8 +71,10 @@ const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
       console.log("POST request successful", response);
       handleClose();
       setModalShow1(true);
+      toast.success("Successfully registered. Please login.");
     } catch (error) {
       console.error("Error sending POST request:", error);
+      toast.error("Failed to register. Please try again.");
     }
   };
 
@@ -43,66 +87,39 @@ const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
       className="rounded-pill"
       contentClassName="bg-transparent"
     >
-      <Modal.Body
-        className="rounded-pill"
-        style={{
-          backgroundImage: "linear-gradient(#123524,#050f0a)",
-          padding: "2rem",
-        }}
-      >
-        <Container
-          fluid
-          className="d-flex flex-column align-items-center text-white"
-        >
+      <ModalBody>
+        <StyledContainer fluid>
           <h2 className="mb-4">Register</h2>
-          <input
-            type="text"
-            name="name"
-            value={formValue.name}
-            onChange={onChange}
-            placeholder="Name"
-            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
-            style={{ width: "80%", border: "1px solid white" }}
-            required
-          />
-          <input
+          <InputField
             type="text"
             name="username"
             value={formValue.username}
             onChange={onChange}
             placeholder="Username"
-            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
-            style={{ width: "80%", border: "1px solid white" }}
             required
           />
-          <input
+          <InputField
             type="email"
             name="email"
             value={formValue.email}
             onChange={onChange}
             placeholder="Email"
-            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
-            style={{ width: "80%", border: "1px solid white" }}
             required
           />
-          <input
+          <InputField
             type="password"
             name="password"
             value={formValue.password}
             onChange={onChange}
             placeholder="Password"
-            className="form-control bg-transparent text-white mb-4 fs-5 rounded-pill"
-            style={{ width: "80%", border: "1px solid white" }}
             required
           />
-          <input
+          <InputField
             type="password"
             name="confirmPassword"
             value={formValue.confirmPassword}
             onChange={onChange}
             placeholder="Confirm Password"
-            className="form-control bg-transparent text-white mb-4 fs-5 rounded-pill"
-            style={{ width: "80%", border: "1px solid white" }}
             required
           />
           <PasswordChecklist
@@ -112,29 +129,22 @@ const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
             valueAgain={formValue.confirmPassword}
             onChange={(isValid) => setIsFormValid(isValid)}
             className="mb-4 text-start"
-            style={{ width: "80%" }}
+            style={{ width: "100%", maxWidth: "400px" }}
           />
           <div className="d-flex justify-content-center w-100">
-            <Button
+            <SubmitButton
               onClick={handleSubmit}
               variant="outline-light"
-              className="fs-5 px-5 py-2 rounded-pill me-3"
-              style={{ width: "180px" }}
               disabled={!isFormValid}
             >
               Register
-            </Button>
-            <Button
-              onClick={handleClose}
-              variant="outline-danger"
-              className="fs-5 px-5 py-2 rounded-pill"
-              style={{ width: "180px" }}
-            >
+            </SubmitButton>
+            <CancelButton onClick={handleClose} variant="outline-danger">
               Cancel
-            </Button>
+            </CancelButton>
           </div>
-        </Container>
-      </Modal.Body>
+        </StyledContainer>
+      </ModalBody>
     </Modal>
   );
 };

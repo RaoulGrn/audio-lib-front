@@ -1,7 +1,49 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
-import { useAuthContext } from "../utils/AuthContext";
 import PasswordChecklist from "react-password-checklist";
+import styled from "styled-components";
+import { useAuthContext } from "../utils/AuthContext";
+import toast from "react-hot-toast";
+
+const StyledModal = styled(Modal)`
+  .modal-content {
+    background-color: transparent;
+  }
+`;
+
+const StyledModalBody = styled(Modal.Body)`
+  background-image: linear-gradient(#123524, #050f0a);
+  padding: 2rem;
+  border-radius: 20px;
+`;
+
+const StyledContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  box-sizing: border-box;
+`;
+
+const StyledButton = styled(Button)`
+  width: 180px;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-right: ${(props) => (props.cancel ? "0" : "1rem")};
+`;
 
 const LoginModal = ({ show, handleClose }) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -15,8 +57,10 @@ const LoginModal = ({ show, handleClose }) => {
         await login(email, password);
         console.log("Performing login...");
         window.location.reload();
+        toast.success("Login successful!");
       } catch (error) {
         console.error("Failed to login:", error);
+        toast.error("Failed to login. Please try again.");
       }
     }
   };
@@ -27,44 +71,24 @@ const LoginModal = ({ show, handleClose }) => {
   };
 
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-      size="lg"
-      centered
-      className="rounded-pill"
-      contentClassName="bg-transparent"
-    >
-      <Modal.Body
-        className="rounded-pill"
-        style={{
-          backgroundImage: "linear-gradient(#123524,#050f0a)",
-          padding: "2rem",
-        }}
-      >
-        <Container
-          fluid
-          className="d-flex flex-column align-items-center text-white"
-        >
+    <StyledModal show={show} onHide={handleClose} size="lg" centered>
+      <StyledModalBody>
+        <StyledContainer fluid>
           <h2 className="mb-4">Login</h2>
-          <input
+          <StyledInput
             type="email"
             name="email"
             value={user.email}
             onChange={onChange}
             placeholder="Email"
-            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
-            style={{ width: "80%", border: "1px solid white" }}
             required
           />
-          <input
+          <StyledInput
             type="password"
             name="password"
             value={user.password}
             onChange={onChange}
             placeholder="Password"
-            className="form-control bg-transparent text-white mb-4 fs-5 rounded-pill"
-            style={{ width: "80%", border: "1px solid white" }}
             required
           />
           <PasswordChecklist
@@ -73,30 +97,27 @@ const LoginModal = ({ show, handleClose }) => {
             value={user.password}
             onChange={(isValid) => setIsFormValid(isValid)}
             className="mb-4 text-start"
-            style={{ width: "80%" }}
+            style={{ width: "100%", maxWidth: "400px" }}
           />
           <div className="d-flex justify-content-center w-100">
-            <Button
+            <StyledButton
               onClick={onSubmit}
               variant="outline-light"
-              className="fs-5 px-5 py-2 rounded-pill me-3"
-              style={{ width: "180px" }}
               disabled={!isFormValid}
             >
               Login
-            </Button>
-            <Button
+            </StyledButton>
+            <StyledButton
               onClick={handleClose}
               variant="outline-danger"
-              className="fs-5 px-5 py-2 rounded-pill"
-              style={{ width: "180px" }}
+              cancel="true"
             >
               Cancel
-            </Button>
+            </StyledButton>
           </div>
-        </Container>
-      </Modal.Body>
-    </Modal>
+        </StyledContainer>
+      </StyledModalBody>
+    </StyledModal>
   );
 };
 

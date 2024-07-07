@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-
+import { useAuthContext } from "../utils/AuthContext";
 const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -34,11 +34,16 @@ const Container = styled.div`
 `;
 
 function AppLayout() {
+  const { user } = useAuthContext();
+
   return (
     <StyledAppLayout>
-      <Header />
+      {user && (
+        <>
+          <Header />
+        </>
+      )}
       <Sidebar />
-
       <Main>
         <Container>
           <Outlet />

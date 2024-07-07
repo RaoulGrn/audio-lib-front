@@ -1,10 +1,29 @@
-import { useState } from "react";
-import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Navbar, Button } from "react-bootstrap";
 import LoginModal from "../components/LoginModal";
 import RegisterModal from "../components/RegisterModal";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../utils/AuthContext";
 import { SiAudiomack } from "react-icons/si";
+import styled from "styled-components";
+import { PiSignInThin } from "react-icons/pi";
+
+const StyledNavbar = styled(Navbar)`
+  background-image: linear-gradient(#123524, #050f0a);
+  padding: 2rem;
+`;
+
+const StyledButton = styled(Button)`
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  border-radius: 20px;
+  margin-right: 1rem;
+
+  &:hover {
+    background-color: #25553e;
+    color: white;
+  }
+`;
 
 const MyComponent = () => {
   const { logout } = useAuthContext();
@@ -15,45 +34,33 @@ const MyComponent = () => {
 
   return (
     <>
-      <Navbar
-        expand="lg"
-        className="rounded-pill fs-xx"
-        style={{
-          backgroundImage: "linear-gradient(#123524,#050f0a)",
-          fontSize: "3rem",
-          padding: "2rem",
-        }}
-        variant="dark"
-      >
+      <StyledNavbar expand="lg" className="rounded-pill">
         <Container
           fluid
           className="d-flex justify-content-between align-items-center"
         >
-          <Link to="/">
-            <Navbar.Brand className="fs-1 fw-light">
-              <SiAudiomack />
-            </Navbar.Brand>
-          </Link>
+          <Navbar.Brand className="fs-1 fw-light text-green-300">
+            <SiAudiomack />
+          </Navbar.Brand>
+
           <div className="d-flex justify-content-center flex-grow-1">
-            <Button
+            <StyledButton
               variant="outline-light"
-              className="me-5 fs-4 px-5 py-2 rounded-pill"
+              className="me-3 fs-4"
               onClick={() => setModalShow(true)}
-              style={{ width: "180px" }}
             >
               Register
-            </Button>
-            <Button
+            </StyledButton>
+            <StyledButton
               variant="outline-light"
-              className="fs-4 px-5 py-2 rounded-pill"
+              className="fs-4"
               onClick={() => setModalShow1(true)}
-              style={{ width: "180px" }}
             >
               Login
-            </Button>
+            </StyledButton>
           </div>
         </Container>
-      </Navbar>
+      </StyledNavbar>
       <LoginModal show={modalShow1} handleClose={handleClose1} />
       <RegisterModal
         show={modalShow}

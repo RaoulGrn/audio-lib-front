@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 const StyledIframe = styled.iframe`
   width: 100%;
@@ -47,6 +48,7 @@ const YouTubePlayer = ({ trackTitle, artistName }) => {
         }
       } catch (error) {
         console.error("Error fetching YouTube video:", error);
+        toast.error("Failed to fetch YouTube video. Please try again.");
       }
     };
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import debounce from "lodash.debounce";
 import { useAuthContext } from "../utils/AuthContext";
+import toast from "react-hot-toast";
 
 const StyledSearchContainer = styled.div`
   position: relative;
@@ -14,7 +15,9 @@ const StyledSearchContainer = styled.div`
 const StyledInput = styled.input`
   width: 100%;
   padding: 0.8rem;
+  background-color: #123524;
   border: 1px solid #123524;
+  color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 2rem;
@@ -37,6 +40,9 @@ const StyledSuggestionsList = styled.ul`
   max-height: 200px;
   overflow-y: auto;
   list-style: none;
+  font-size: 1.6rem;
+  color: white;
+  background-color: #123524;
   padding: 0;
   margin: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -49,7 +55,7 @@ const StyledSuggestionItem = styled.li`
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #0b160f;
   }
 `;
 
@@ -139,6 +145,7 @@ function Autocomplete({ onSelect }) {
           setError(
             "An error occurred while fetching suggestions. Please try again."
           );
+          toast.error("Failed to fetch suggestions. Please try again.");
         }
 
         setLoading(false);

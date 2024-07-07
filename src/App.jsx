@@ -6,6 +6,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import PublicPage from "./pages/PublicPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthContextProvider } from "./utils/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ function App() {
     <>
       <RouterProvider router={router} />
       <GlobalStyles />
+      <Toaster />
     </>
   );
 }

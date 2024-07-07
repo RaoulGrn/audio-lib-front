@@ -97,7 +97,7 @@ function MainNav() {
           <>
             <li>
               <StyledNavLink to="/">
-                <CgMusicSpeaker style={{ color: "lightgreen" }} />
+                <CgMusicSpeaker style={{ color: "#2f8d5f" }} />
                 <span>Home</span>
               </StyledNavLink>
             </li>
