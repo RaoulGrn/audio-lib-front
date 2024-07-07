@@ -10,6 +10,7 @@ const StyledContainer = styled.div`
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
+  flex-wrap: wrap; /* Allow flex items to wrap to next line */
 `;
 
 const TrackList = styled.ul`
@@ -75,6 +76,11 @@ const TextContainer3 = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
+const YouTubeContainer = styled.div`
+  flex-basis: 100%;
+  margin-top: 1.6rem;
+`;
+
 function Home() {
   const [selectedData, setSelectedData] = useState(null);
   const [selectedTrack, setSelectedTrack] = useState(null);
@@ -98,10 +104,10 @@ function Home() {
   };
 
   return (
-    <div>
+    <StyledContainer className="text-gray-300 fs-5">
       <Autocomplete onSelect={handleSelect} />
       {selectedData && (
-        <StyledContainer className="text-gray-300 fs-5">
+        <>
           {selectedData.type === "artist" && (
             <TextContainer>
               <Title1>{selectedData.name}</Title1>
@@ -109,7 +115,9 @@ function Home() {
                 {selectedData.albums.map((album, index) => (
                   <div key={index}>
                     <Title2>Album: {album.title}</Title2>
-                    <Title3>{album.description}</Title3>
+                    <TextContainer>
+                      <Title3>{album.description}</Title3>
+                    </TextContainer>
                     <TextContainer>
                       <TrackList>
                         {album.songs.map((song, idx) => (
@@ -132,7 +140,10 @@ function Home() {
           {selectedData.type === "album" && (
             <TextContainer>
               <Title1>Album: {selectedData.title}</Title1>
-              <Title2>Artist: {selectedData.artist}</Title2>
+
+              <TextContainer2>
+                <Title2>Artist: {selectedData.artist}</Title2>
+              </TextContainer2>
               <Title3>{selectedData.description}</Title3>
               <TextContainer2>
                 <TrackList>
@@ -152,29 +163,31 @@ function Home() {
             </TextContainer>
           )}
           {selectedData.type === "song" && (
-            <TextContainer3 className=" w-100 ">
-              <TextContainer className="p-4 m-3">
-                <Title1
-                  className="border-bottom border-2 rounded-3xl border-gray-300 p-2"
-                  onClick={() =>
-                    handleTrackClick(selectedData.title, selectedData.artist)
-                  }
-                  style={{ cursor: "pointer" }}
-                >
-                  Track Name: {selectedData.title}
-                </Title1>
-                <Title2>Artist: {selectedData.artist}</Title2>
-                <Title3>Album: {selectedData.album}</Title3>
-                <p>Length: {selectedData.length}</p>
-              </TextContainer>
+            <TextContainer3>
+              <Title1
+                onClick={() =>
+                  handleTrackClick(selectedData.title, selectedData.artist)
+                }
+                style={{ cursor: "pointer" }}
+              >
+                Track Name: {selectedData.title}
+              </Title1>
+              <Title2>Artist: {selectedData.artist}</Title2>
+              <Title3>Album: {selectedData.album}</Title3>
+              <p>Length: {selectedData.length}</p>
             </TextContainer3>
           )}
-        </StyledContainer>
+        </>
       )}
       {selectedTrack && (
-        <YouTubePlayer trackTitle={selectedTrack} artistName={selectedArtist} />
+        <YouTubeContainer>
+          <YouTubePlayer
+            trackTitle={selectedTrack}
+            artistName={selectedArtist}
+          />
+        </YouTubeContainer>
       )}
-    </div>
+    </StyledContainer>
   );
 }
 

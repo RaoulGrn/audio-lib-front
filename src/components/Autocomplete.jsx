@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import debounce from "lodash.debounce";
@@ -30,9 +30,6 @@ const StyledInput = styled.input`
 `;
 
 const StyledSuggestionsList = styled.ul`
-  position: absolute;
-  top: 100%;
-  left: 0;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -46,7 +43,6 @@ const StyledSuggestionsList = styled.ul`
   padding: 0;
   margin: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
 `;
 
 const StyledSuggestionItem = styled.li`
