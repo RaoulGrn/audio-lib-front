@@ -57,7 +57,8 @@ $ npm run dev
  
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/f179bc22-9829-4b23-bace-d33f2f0e4bd2" width="100%" height="100%">
 
-<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/bd29b89d-960e-4d1a-a2ac-2bfdeb09f74a" width="100%" height="100%">
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/0e1cecff-44fd-4e9c-966c-90aef67acecc" width="100%" height="100%">
+
 
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/8308939b-d16c-4a00-a9e8-e965a63834f2" width="100%" height="100%">
 
