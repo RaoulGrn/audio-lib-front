@@ -90,6 +90,7 @@ function Autocomplete({ onSelect }) {
 
         try {
           const sanitizedValue = sanitizeInput(value);
+
           const artistsResponse = await axios.get(
             `http://localhost:3000/artists`,
             {

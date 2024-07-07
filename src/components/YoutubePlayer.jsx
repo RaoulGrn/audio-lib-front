@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import toast from "react-hot-toast";
@@ -24,10 +24,16 @@ const YouTubePlayerContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
   margin-bottom: 4rem;
+
+  transition: box-shadow 0.3s;
+  &:focus {
+    box-shadow: 0 0 0 4px rgba(38, 77, 41, 0.7);
+  }
 `;
 
 const YouTubePlayer = ({ trackTitle, artistName }) => {
   const [videoId, setVideoId] = useState(null);
+  const playerContainerRef = useRef(null);
 
   useEffect(() => {
     const fetchVideoId = async () => {
@@ -57,10 +63,16 @@ const YouTubePlayer = ({ trackTitle, artistName }) => {
     }
   }, [trackTitle]);
 
+  useEffect(() => {
+    if (playerContainerRef.current) {
+      playerContainerRef.current.focus();
+    }
+  }, [videoId]);
+
   if (!videoId) return null;
 
   return (
-    <YouTubePlayerContainer>
+    <YouTubePlayerContainer ref={playerContainerRef} tabIndex={0}>
       <StyledIframe
         src={`https://www.youtube.com/embed/${videoId}`}
         allow="autoplay; encrypted-media"

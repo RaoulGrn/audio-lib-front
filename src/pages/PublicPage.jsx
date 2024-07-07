@@ -11,6 +11,7 @@ import { PiSignInThin } from "react-icons/pi";
 const StyledNavbar = styled(Navbar)`
   background-image: linear-gradient(#123524, #050f0a);
   padding: 2rem;
+  height: 50vh;
 `;
 
 const StyledButton = styled(Button)`
