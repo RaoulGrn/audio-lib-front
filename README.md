@@ -5,7 +5,7 @@ I also had to implement an autocomplete component that provides suggestions as a
 
 ## Technologies Involved
 
-* Backend in NestJs
+* Backend in NestJs https://github.com/RaoulGrn/audio-lib-back/tree/master
 * Frontend in React(vite).
   
 ### Other modules/plugins/technologies:
