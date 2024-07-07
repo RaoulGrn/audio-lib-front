@@ -24,7 +24,7 @@ const TrackItem = styled.li`
   transition: background-color 0.1s ease;
   border-radius: 8px;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 
   &:hover {
     background-color: #0b160f;
@@ -53,7 +53,7 @@ const Title3 = styled.h4`
 const TextContainer = styled.div`
   margin-top: 1.6rem;
   padding: 2.2rem;
-  background-color: #1a271f;
+  background-color: #0d0f0e;
   border-radius: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;

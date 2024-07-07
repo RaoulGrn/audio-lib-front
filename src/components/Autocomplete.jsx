@@ -15,7 +15,7 @@ const StyledSearchContainer = styled.div`
 const StyledInput = styled.input`
   width: 100%;
   padding: 0.8rem;
-  background-color: #123524;
+  background-color: #0b160f;
   border: 1px solid #123524;
   color: white;
   border-radius: 8px;

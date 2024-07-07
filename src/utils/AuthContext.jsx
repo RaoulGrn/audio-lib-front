@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 
@@ -78,6 +79,7 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     navigate("/public");
+    toast.success("Logged out successfully!");
   };
 
   const authContextValues = {
