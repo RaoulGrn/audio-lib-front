@@ -37,7 +37,7 @@ $ npm install
 $ npm run dev
 ```
 
-#Features 
+# Features 
 
 ## Public page which you can access and from where users can choose to register or login
 
