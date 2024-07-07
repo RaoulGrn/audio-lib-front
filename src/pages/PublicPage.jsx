@@ -14,6 +14,11 @@ const StyledNavbar = styled(Navbar)`
   height: 50vh;
 `;
 
+const StyledSiAudimack = styled(SiAudiomack)`
+  color: #2a5741;
+  font-size: 14rem;
+`;
+
 const StyledButton = styled(Button)`
   font-size: 1.5rem;
   padding: 0.5rem 2rem;
@@ -40,11 +45,11 @@ const MyComponent = () => {
           fluid
           className="d-flex justify-content-between align-items-center"
         >
-          <Navbar.Brand className="fs-1 fw-light text-green-300">
-            <SiAudiomack />
+          <Navbar.Brand className="fs-1 fw-light">
+            <StyledSiAudimack />
           </Navbar.Brand>
 
-          <div className="d-flex justify-content-center flex-grow-1">
+          <div className="d-flex justify-content-center space-x-24 flex-grow-1">
             <StyledButton
               variant="outline-light"
               className="me-3 fs-4"
