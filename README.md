@@ -27,9 +27,9 @@ $ npm install
 
 * You should create .env file (yes, it works on frontend) and enter a Google Youtube Data v3 API BUT (for testing purposes I will let my .env file come with my API key for a few days, just for testing purposes. (It is restricted anyway so no harm can be done). Check photos if you want to replace it.
 
-<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/eaa4a27a-cbb9-4072-8c74-1cd26010b17c" width="100%" height="100%">
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/eaa4a27a-cbb9-4072-8c74-1cd26010b17c" width="50%" height="5%">
   
-<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/e6eb1ca3-94e9-4f23-8c69-a726bb77cb12" width="100%" height="100%">
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/e6eb1ca3-94e9-4f23-8c69-a726bb77cb12" width="50%" height="50%">
 
 ```bash
 $ npm run dev
