@@ -19,10 +19,14 @@ Features:
 
 ### Home Page - Where users can use the input to search for their preffered artists/album/songs.
 * If users click on a song name a youtube Iframe will appear
+  
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/70e98209-5cdb-4edf-acdd-97917e2eb14e" width="100%" height="100%">
 
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/bd29b89d-960e-4d1a-a2ac-2bfdeb09f74a" width="100%" height="100%">
 
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/8308939b-d16c-4a00-a9e8-e965a63834f2" width="100%" height="100%">
 
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/5d3f07d6-14fe-4c64-bf65-8bd96b1debaa" width="100%" height="100%">
+
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/bb8340ac-6e60-4929-9249-f359b0d33d34" width="100%" height="100%">
 
