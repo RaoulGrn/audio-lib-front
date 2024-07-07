@@ -45,11 +45,13 @@ $ npm run dev
 
 ### Register Modal - With validators and success/error custom messages (react-toaster)
 
-<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/3f682561-38b5-483c-bd25-f1a58b1b584b" width="100%" height="100%">
+
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/5bbd2d5a-d5f1-4751-ba4e-012c856ed51e" width="100%" height="100%">
 
 ### Login Modal  - With validators and success/error custom messages (react-toaster)
 
-<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/2fd60e88-2a83-4bd8-8b7d-d0302f07715a" width="100%" height="100%">
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/5e4e933b-5216-4189-a1b7-5416e62b6e18" width="100%" height="100%">
+
 
 ### Home Page - Where users can use the input to search for their preffered artists/album/songs.
 * The input has an autocomplete feature that is sanitized and also has lodash.debounce implemented to limit unnecessary requests to the server
