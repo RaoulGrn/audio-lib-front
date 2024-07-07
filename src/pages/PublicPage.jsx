@@ -12,28 +12,30 @@ const StyledNavbar = styled(Navbar)`
 `;
 
 const trembleAnimation = keyframes`
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(2deg); }
-  50% { transform: rotate(-2deg); }
-  75% { transform: rotate(1deg); }
-  100% { transform: rotate(0deg); }
+  0% { transform: rotate(0deg);opacity: 0; }
+  25% { transform: rotate(2deg); opacity: 0.25;}
+  50% { transform: rotate(-2deg);    opacity: 0.5;}
+  75% { transform: rotate(1deg); opacity: 0.75; }
+  100% { transform: rotate(0deg); opacity: 1;}
 `;
 
 const appearAnimation = keyframes`
-  from {
-    width: 0;
-    opacity: 0;
-  }
-  to {
-    width: 100%;
-    opacity: 1;
-  }
+  0% {  width: 0;
+    opacity: 0; }
+  25% { width: 25%;
+    opacity: 0.25; }
+  50% {  width: 100%;
+    opacity: 1;}
+  75% { width: 75%;
+    opacity: 0.75; }
+  100% { width: 0;
+    opacity: 0; }
 `;
 
 const StyledSiAudimack = styled(SiAudiomack)`
   color: #2a5741;
   font-size: 14rem;
-  animation: ${trembleAnimation} 0.5s ease-in-out infinite;
+  animation: ${trembleAnimation} 2s ease-in-out infinite;
 `;
 
 const StyledTextContainer = styled.div`
@@ -48,7 +50,7 @@ const StyledText = styled.span`
   color: #376e54;
   overflow: hidden;
 
-  animation: ${appearAnimation} 2s ease-out forwards;
+  animation: ${appearAnimation} 5s ease-out infinite;
 `;
 
 const StyledButton = styled(Button)`
