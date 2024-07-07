@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import LoginModal from "../components/LoginModal";
 import RegisterModal from "../components/RegisterModal";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../utils/AuthContext";
+import { SiAudiomack } from "react-icons/si";
 
 const MyComponent = () => {
   const { logout } = useAuthContext();
@@ -15,36 +16,42 @@ const MyComponent = () => {
   return (
     <>
       <Navbar
-        collapseOnSelect
-        className={"public-navbarz"}
         expand="lg"
+        className="rounded-pill fs-xx"
         style={{
           backgroundImage: "linear-gradient(#123524,#050f0a)",
           fontSize: "3rem",
-          justifyContent: "space-between",
-          padding: "2rem ",
+          padding: "2rem",
         }}
         variant="dark"
       >
-        <Container className={"flex"}>
+        <Container
+          fluid
+          className="d-flex justify-content-between align-items-center"
+        >
           <Link to="/">
-            <Navbar.Brand className={"fs-1 fw-light flex "}> </Navbar.Brand>
+            <Navbar.Brand className="fs-1 fw-light">
+              <SiAudiomack />
+            </Navbar.Brand>
           </Link>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav>
-              <Nav.Link href="#" onClick={() => setModalShow(true)}>
-                <span className={""}>Register</span>
-              </Nav.Link>
-              <Nav.Link
-                eventKey={2}
-                href="#"
-                onClick={() => setModalShow1(true)}
-              >
-                <span className={"spans-one"}>Login</span>
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+          <div className="d-flex justify-content-center flex-grow-1">
+            <Button
+              variant="outline-light"
+              className="me-5 fs-4 px-5 py-2 rounded-pill"
+              onClick={() => setModalShow(true)}
+              style={{ width: "180px" }}
+            >
+              Register
+            </Button>
+            <Button
+              variant="outline-light"
+              className="fs-4 px-5 py-2 rounded-pill"
+              onClick={() => setModalShow1(true)}
+              style={{ width: "180px" }}
+            >
+              Login
+            </Button>
+          </div>
         </Container>
       </Navbar>
       <LoginModal show={modalShow1} handleClose={handleClose1} />

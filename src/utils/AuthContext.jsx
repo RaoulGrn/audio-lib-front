@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
@@ -36,6 +36,14 @@ export const AuthContextProvider = ({ children }) => {
       return { user: null, jwt: "" };
     }
   });
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(JSON.parse(storedToken));
+    }
+  }, []);
+
   const returnUrl = "/";
 
   const login = async (email, password) => {
@@ -48,7 +56,6 @@ export const AuthContextProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
       });
 
-      console.log(email, password, response.status, response.statusText);
       if (response.status === 200 || response.status === 201) {
         const token = await response.text();
         localStorage.setItem("user", JSON.stringify(email));

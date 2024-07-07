@@ -4,10 +4,10 @@ import styled from "styled-components";
 
 const StyledIframe = styled.iframe`
   width: 100%;
-  max-width: 560px;
-  height: 315px;
+  max-width: 60rem;
+  height: 35rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 2rem 0;
 `;
@@ -17,11 +17,12 @@ const YouTubePlayerContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  padding: 1rem;
+  background-color: #0b160f;
+  border-radius: 32px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
+  margin-bottom: 4rem;
 `;
 
 const YouTubePlayer = ({ trackTitle, artistName }) => {

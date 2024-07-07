@@ -22,6 +22,7 @@ const StyledNavLink = styled(NavLink)`
     font-weight: 500;
     padding: 1.2rem 2.4rem;
     transition: all 0.3s;
+    text-decoration: none; /* Ensure no underline */
   }
 
   &:hover,
@@ -48,6 +49,40 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const LogoutButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  color: var(--color-grey-600);
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 1.2rem 2.4rem;
+  background: none;
+  border: none;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: var(--color-grey-800);
+    background-color: var(--color-grey-300);
+    border-radius: var(--border-radius-sm);
+  }
+
+  & svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--color-grey-400);
+    transition: all 0.3s;
+  }
+
+  &:hover svg,
+  &:active svg {
+    color: var(--color-brand-600);
+  }
+`;
+
 function MainNav() {
   const { user, logout } = useAuthContext();
 
@@ -58,21 +93,22 @@ function MainNav() {
   return (
     <nav>
       <NavList>
-        <li>
-          {user && (
-            <>
+        {user && (
+          <>
+            <li>
               <StyledNavLink to="/">
                 <CgMusicSpeaker style={{ color: "lightgreen" }} />
                 <span>Home</span>
               </StyledNavLink>
-
-              <StyledNavLink className="mt-4" onClick={handleLogout}>
+            </li>
+            <li>
+              <LogoutButton onClick={handleLogout}>
                 <IoLogOutOutline style={{ color: "red" }} />
                 <span>Logout</span>
-              </StyledNavLink>
-            </>
-          )}
-        </li>
+              </LogoutButton>
+            </li>
+          </>
+        )}
       </NavList>
     </nav>
   );

@@ -26,7 +26,7 @@ const TrackItem = styled.li`
   text-align: center;
 
   &:hover {
-    background-color: #476e53;
+    background-color: #0b160f;
     border-radius: 16px;
     padding: 8px;
   }
@@ -35,15 +35,15 @@ const TrackItem = styled.li`
 const TextContainer = styled.div`
   margin-top: 1.6rem;
   padding: 2.2rem;
-  background-color: #123524;
-  border-radius: 8px;
+  background-color: #1a271f;
+  border-radius: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const TextContainer2 = styled.div`
   margin-top: 1.6rem;
   padding: 1.2rem;
-  background-color: #265c42;
+  background-color: #0b160f;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -52,8 +52,8 @@ const TextContainer3 = styled.div`
   margin-top: 1.6rem;
   padding: 1.2rem;
   width: 100%;
-  background-color: #265c42;
-  border-radius: 8px;
+  background-color: #0b160f;
+  border-radius: 24px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -83,7 +83,7 @@ function Home() {
     <div>
       <Autocomplete onSelect={handleSelect} />
       {selectedData && (
-        <StyledContainer className="text-gray-300">
+        <StyledContainer className="text-gray-300 fs-5">
           {selectedData.type === "artist" && (
             <TextContainer>
               <h2>{selectedData.name}</h2>

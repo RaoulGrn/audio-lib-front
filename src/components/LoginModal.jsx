@@ -1,117 +1,101 @@
 import { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import PasswordChecklist from "react-password-checklist";
-import {
-  MDBValidation,
-  MDBValidationItem,
-  MDBInput,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+import { Modal, Button, Container } from "react-bootstrap";
 import { useAuthContext } from "../utils/AuthContext";
+import PasswordChecklist from "react-password-checklist";
 
 const LoginModal = ({ show, handleClose }) => {
-  const [isFormValid, setIsFormValid] = useState(false);
   const [user, setUser] = useState({ email: "", password: "" });
+  const [isFormValid, setIsFormValid] = useState(false);
   const { login } = useAuthContext();
 
   const onSubmit = async () => {
     const { email, password } = user;
-
     if (email && password) {
       try {
         await login(email, password);
         console.log("Performing login...");
+        window.location.reload();
       } catch (error) {
         console.error("Failed to login:", error);
       }
     }
   };
 
-  const onEmailChange = (e) => {
-    setUser((prevState) => ({
-      ...prevState,
-      email: e.target.value,
-    }));
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
-
-  const onPasswordChange = (e) => {
-    setUser((prevState) => ({
-      ...prevState,
-      password: e.target.value,
-    }));
-  };
-  console.log(user.email, user.password);
 
   return (
     <Modal
       show={show}
       onHide={handleClose}
-      style={{
-        backgroundImage: "linear-gradient( #2D4059,#222831)",
-      }}
+      size="lg"
+      centered
+      className="rounded-pill"
+      contentClassName="bg-transparent"
     >
-      <Modal.Header className="bg-custom-gray text-success" closeButton>
-        <Modal.Title>Login</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="bg-custom-gray text-white">
-        <p>Please enter your email and password.</p>
-        <MDBValidation className="row g-3" isValidated>
-          <MDBValidationItem
-            className="col-md-12"
-            feedback="Please enter a valid email."
-            invalid
-          >
-            <MDBInput
-              type="email"
-              id="typeText"
-              className="form-control"
-              placeholder="John Doe"
-              value={user.email}
-              onChange={onEmailChange}
-              required
-            />
-          </MDBValidationItem>
-          <MDBValidationItem
-            className="col-md-12"
-            feedback="Please enter a valid password."
-            invalid
-          >
-            <MDBInput
-              type="password"
-              id="typePassword"
-              className="form-control"
-              placeholder="Password"
-              value={user.password}
-              onChange={onPasswordChange}
-              required
-            />
-          </MDBValidationItem>
-          <div className="col-12">
-            <MDBBtn
-              className={"border-dark bg-success"}
-              onClick={onSubmit}
-              disabled={!isFormValid}
-              type="submit"
-            >
-              Login
-            </MDBBtn>
-          </div>
+      <Modal.Body
+        className="rounded-pill"
+        style={{
+          backgroundImage: "linear-gradient(#123524,#050f0a)",
+          padding: "2rem",
+        }}
+      >
+        <Container
+          fluid
+          className="d-flex flex-column align-items-center text-white"
+        >
+          <h2 className="mb-4">Login</h2>
+          <input
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={onChange}
+            placeholder="Email"
+            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
+            style={{ width: "80%", border: "1px solid white" }}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={onChange}
+            placeholder="Password"
+            className="form-control bg-transparent text-white mb-4 fs-5 rounded-pill"
+            style={{ width: "80%", border: "1px solid white" }}
+            required
+          />
           <PasswordChecklist
-            rules={["minLength", "specialChar", "number", "capital", "match"]}
+            rules={["minLength", "specialChar", "number", "capital"]}
             minLength={5}
             value={user.password}
-            valueAgain={user.password}
-            onChange={(isValid) => {
-              setIsFormValid(isValid);
-            }}
+            onChange={(isValid) => setIsFormValid(isValid)}
+            className="mb-4 text-start"
+            style={{ width: "80%" }}
           />
-        </MDBValidation>
+          <div className="d-flex justify-content-center w-100">
+            <Button
+              onClick={onSubmit}
+              variant="outline-light"
+              className="fs-5 px-5 py-2 rounded-pill me-3"
+              style={{ width: "180px" }}
+              disabled={!isFormValid}
+            >
+              Login
+            </Button>
+            <Button
+              onClick={handleClose}
+              variant="outline-danger"
+              className="fs-5 px-5 py-2 rounded-pill"
+              style={{ width: "180px" }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </Container>
       </Modal.Body>
-      <Modal.Footer className="bg-custom-gray text-white">
-        <Button variant="danger" onClick={handleClose}>
-          Close
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };

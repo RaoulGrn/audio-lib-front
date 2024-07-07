@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import debounce from "lodash.debounce";
@@ -71,10 +71,6 @@ function Autocomplete({ onSelect }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { user, token } = useAuthContext();
-  console.log(token);
-
-  const tokenString = token?.token || "";
-  console.log("TokenString " + tokenString);
 
   const sanitizeInput = (input) => {
     return input.replace(/[^\w\s]/gi, "");
@@ -92,7 +88,7 @@ function Autocomplete({ onSelect }) {
             `http://localhost:3000/artists`,
             {
               headers: {
-                Authorization: `Bearer ${tokenString}`,
+                Authorization: `Bearer ${token?.token || ""}`,
               },
             }
           );
@@ -153,6 +149,10 @@ function Autocomplete({ onSelect }) {
     [token]
   );
 
+  useEffect(() => {
+    fetchSuggestions(query);
+  }, [query, fetchSuggestions, token]);
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
@@ -164,6 +164,10 @@ function Autocomplete({ onSelect }) {
     setSuggestions([]);
     onSelect(suggestion);
   };
+
+  useEffect(() => {
+    fetchSuggestions(query);
+  }, [query, fetchSuggestions]);
 
   return (
     <StyledSearchContainer>

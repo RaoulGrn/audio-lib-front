@@ -1,18 +1,9 @@
 import { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import {
-  MDBValidation,
-  MDBValidationItem,
-  MDBInput,
-  MDBInputGroup,
-  MDBBtn,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
+import { Modal, Button, Container } from "react-bootstrap";
 import PasswordChecklist from "react-password-checklist";
 import axios from "axios";
 
 const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
-  const [isFormValid, setIsFormValid] = useState(true);
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
@@ -20,6 +11,8 @@ const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
     password: "",
     confirmPassword: "",
   });
+  const [isFormValid, setIsFormValid] = useState(false);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormValue((prevFormValue) => ({ ...prevFormValue, [name]: value }));
@@ -40,121 +33,110 @@ const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
       console.error("Error sending POST request:", error);
     }
   };
+
   return (
     <Modal
       show={show}
       onHide={handleClose}
-      style={{
-        backgroundImage: "linear-gradient( #2D4059,#222831)",
-      }}
+      size="lg"
+      centered
+      className="rounded-pill"
+      contentClassName="bg-transparent"
     >
-      <Modal.Header className={"bg-custom-gray text-success"} closeButton>
-        <Modal.Title>Register</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className={"bg-custom-gray text-white"}>
-        <p>Please enter your email and desired username & password.</p>
-        <MDBValidation className="row g-3" isValidated>
-          <MDBValidationItem className="col-md-4">
-            <MDBInput
-              value={formValue.name}
-              name="name"
-              onChange={onChange}
-              id="validationCustom01"
-              required
-              label="Name"
-            />
-          </MDBValidationItem>
-          <MDBValidationItem className="col-md-4">
-            <MDBInput
-              value={formValue.username}
-              name="username"
-              onChange={onChange}
-              id="validationCustom02"
-              required
-              label="Username"
-            />
-          </MDBValidationItem>
-          <MDBValidationItem
-            feedback="Please choose an email."
-            className="col-md-4"
-          >
-            <MDBInputGroup>
-              <MDBInput
-                type="email"
-                value={formValue.email}
-                name="email"
-                onChange={onChange}
-                id="validationCustom03"
-                required
-                label="Email"
-              />
-            </MDBInputGroup>
-          </MDBValidationItem>
-          <MDBValidationItem
-            className="col-md-6"
-            feedback="Please provide a valid password."
-          >
-            <MDBInput
-              type="password"
-              value={formValue.password}
-              name="password"
-              onChange={onChange}
-              id="validationCustom03"
-              required
-              label="Password"
-            />
-          </MDBValidationItem>
-          <MDBValidationItem
-            className="col-md-6"
-            feedback="Please rewrite password."
-          >
-            <MDBInput
-              type="password"
-              value={formValue.confirmPassword}
-              name="confirmPassword"
-              onChange={onChange}
-              id="validationCustom05"
-              required
-              label="Confirm Password"
-            />
-          </MDBValidationItem>
-          <MDBValidationItem
-            className="col-12"
-            feedback="You must agree before submitting."
-          >
-            <MDBCheckbox
-              label="Agree to terms and conditions"
-              id="invalidCheck"
-              required
-            />
-          </MDBValidationItem>
-          <div className="col-12">
-            <MDBBtn
-              onClick={handleSubmit}
-              disabled={isFormValid}
-              type="submit"
-              className={"border-dark bg-success text-white"}
-            >
-              Register
-            </MDBBtn>
-          </div>
+      <Modal.Body
+        className="rounded-pill"
+        style={{
+          backgroundImage: "linear-gradient(#123524,#050f0a)",
+          padding: "2rem",
+        }}
+      >
+        <Container
+          fluid
+          className="d-flex flex-column align-items-center text-white"
+        >
+          <h2 className="mb-4">Register</h2>
+          <input
+            type="text"
+            name="name"
+            value={formValue.name}
+            onChange={onChange}
+            placeholder="Name"
+            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
+            style={{ width: "80%", border: "1px solid white" }}
+            required
+          />
+          <input
+            type="text"
+            name="username"
+            value={formValue.username}
+            onChange={onChange}
+            placeholder="Username"
+            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
+            style={{ width: "80%", border: "1px solid white" }}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={formValue.email}
+            onChange={onChange}
+            placeholder="Email"
+            className="form-control bg-transparent text-white mb-3 fs-5 rounded-pill"
+            style={{ width: "80%", border: "1px solid white" }}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            value={formValue.password}
+            onChange={onChange}
+            placeholder="Password"
+            className="form-control bg-transparent text-white mb-4 fs-5 rounded-pill"
+            style={{ width: "80%", border: "1px solid white" }}
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            value={formValue.confirmPassword}
+            onChange={onChange}
+            placeholder="Confirm Password"
+            className="form-control bg-transparent text-white mb-4 fs-5 rounded-pill"
+            style={{ width: "80%", border: "1px solid white" }}
+            required
+          />
           <PasswordChecklist
             rules={["minLength", "specialChar", "number", "capital", "match"]}
             minLength={5}
             value={formValue.password}
             valueAgain={formValue.confirmPassword}
-            onChange={(isValid) => {
-              if (isValid) setIsFormValid(false);
-            }}
+            onChange={(isValid) => setIsFormValid(isValid)}
+            className="mb-4 text-start"
+            style={{ width: "80%" }}
           />
-        </MDBValidation>
+          <div className="d-flex justify-content-center w-100">
+            <Button
+              onClick={handleSubmit}
+              variant="outline-light"
+              className="fs-5 px-5 py-2 rounded-pill me-3"
+              style={{ width: "180px" }}
+              disabled={!isFormValid}
+            >
+              Register
+            </Button>
+            <Button
+              onClick={handleClose}
+              variant="outline-danger"
+              className="fs-5 px-5 py-2 rounded-pill"
+              style={{ width: "180px" }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </Container>
       </Modal.Body>
-      <Modal.Footer className={"bg-custom-gray text-white"}>
-        <Button variant="danger" onClick={handleClose}>
-          Close
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };
+
 export default RegisterModal;
