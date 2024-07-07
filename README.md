@@ -1,6 +1,6 @@
 # Audio Library
 
-This project was made for the technical assessment of MMCTech. My task was to design and implement a digital music library, where you’ll be able to visualize your artists and their albums and open the albums to view a description and list of songs.
+This project was made for the technical assessment of MMCTech. My task was to design and implement a digital music library, where you’ll be able to visualize your artists and their albums with a description and their songs.
 I also had to implement an autocomplete component that provides suggestions as a user enters a search box. 
 
 ## Technologies Involved
