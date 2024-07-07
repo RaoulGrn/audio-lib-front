@@ -7,7 +7,8 @@ You will also implement an autocomplete component that provides suggestions as a
 
 * Backend in NestJs
 * Frontend in React(vite).
-* Other modules/plugins/technologies:
+  
+### Other modules/plugins/technologies:
             * styled components
             * react-bootstrap
             * mdb-react-ui-kit
