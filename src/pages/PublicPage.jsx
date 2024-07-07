@@ -6,9 +6,11 @@ import { SiAudiomack } from "react-icons/si";
 import styled, { keyframes } from "styled-components";
 
 const StyledNavbar = styled(Navbar)`
-  background-image: linear-gradient(#123524, #050f0a);
+  background-image: linear-gradient(#13291e, #050f0a);
   padding: 2rem;
   height: 50vh;
+  overflow: hidden;
+  margin-top: 25rem;
 `;
 
 const trembleAnimation = keyframes`
