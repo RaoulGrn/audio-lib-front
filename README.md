@@ -41,7 +41,7 @@ $ npm run dev
 
 ## Public page (unprotected route) where users can choose to register or login
 
-<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/da271b6c-25f9-4cd1-9f7b-7291e225386f" width="100%" height="100%">
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/49bed66b-a767-4736-b850-f23cd0e458a4" width="100%" height="100%">
 
 ### Register Modal - With validators and success/error custom messages (react-toaster)
 
