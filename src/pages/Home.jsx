@@ -10,7 +10,7 @@ const StyledContainer = styled.div`
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
-  flex-wrap: wrap; /* Allow flex items to wrap to next line */
+  flex-wrap: wrap; 
 `;
 
 const TrackList = styled.ul`
