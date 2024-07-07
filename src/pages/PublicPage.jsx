@@ -30,6 +30,7 @@ const appearAnimation = keyframes`
     opacity: 0.75; }
   100% { width: 0;
     opacity: 0; }
+    
 `;
 
 const StyledSiAudimack = styled(SiAudiomack)`
@@ -49,10 +50,18 @@ const StyledText = styled.span`
   white-space: nowrap;
   color: #376e54;
   overflow: hidden;
-
   animation: ${appearAnimation} 5s ease-out infinite;
-`;
 
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+  }
+`;
 const StyledButton = styled(Button)`
   font-size: 1.5rem;
   padding: 0.5rem 2rem;
