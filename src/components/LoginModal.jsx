@@ -12,8 +12,8 @@ const StyledModal = styled(Modal)`
 `;
 
 const StyledModalBody = styled(Modal.Body)`
-  background-image: linear-gradient(#123524, #050f0a);
-
+  background-image: linear-gradient(#112b1e, #050f0a);
+  border: 1px solid gray;
   padding: 2rem;
   border-radius: 20px;
 `;
@@ -75,7 +75,6 @@ const LoginModal = ({ show, handleClose }) => {
     <StyledModal show={show} onHide={handleClose} size="lg" centered>
       <StyledModalBody>
         <StyledContainer fluid>
-          <h2 className="mb-4">Login</h2>
           <StyledInput
             type="email"
             name="email"

@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 const ModalBody = styled(Modal.Body)`
   background-image: linear-gradient(#123524, #050f0a);
   padding: 2rem;
+  border: 1px solid gray;
   border-radius: 20px;
 `;
 
@@ -89,7 +90,6 @@ const RegisterModal = ({ show, handleClose, setModalShow1 }) => {
     >
       <ModalBody>
         <StyledContainer fluid>
-          <h2 className="mb-4">Register</h2>
           <InputField
             type="text"
             name="username"
