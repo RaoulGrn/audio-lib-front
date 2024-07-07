@@ -31,6 +31,8 @@ $ npm install
   
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/e6eb1ca3-94e9-4f23-8c69-a726bb77cb12" width="50%" height="50%">
 
+* Run the project
+
 ```bash
 $ npm run dev
 ```
