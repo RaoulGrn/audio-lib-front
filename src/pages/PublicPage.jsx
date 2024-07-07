@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import LoginModal from "../components/LoginModal";
 import RegisterModal from "../components/RegisterModal";
 import { SiAudiomack } from "react-icons/si";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const StyledNavbar = styled(Navbar)`
   background-image: linear-gradient(#123524, #050f0a);
@@ -11,9 +11,44 @@ const StyledNavbar = styled(Navbar)`
   height: 50vh;
 `;
 
+const trembleAnimation = keyframes`
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+`;
+
+const appearAnimation = keyframes`
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+`;
+
 const StyledSiAudimack = styled(SiAudiomack)`
   color: #2a5741;
   font-size: 14rem;
+  animation: ${trembleAnimation} 0.5s ease-in-out infinite;
+`;
+
+const StyledTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledText = styled.span`
+  font-size: 3rem;
+  margin-left: 2rem;
+  white-space: nowrap;
+  color: #376e54;
+  overflow: hidden;
+
+  animation: ${appearAnimation} 2s ease-out forwards;
 `;
 
 const StyledButton = styled(Button)`
@@ -31,8 +66,18 @@ const StyledButton = styled(Button)`
 const MyComponent = () => {
   const [modalShow, setModalShow] = useState(false);
   const [modalShow1, setModalShow1] = useState(false);
+  const [showText, setShowText] = useState(false);
+
   const handleClose = () => setModalShow(false);
   const handleClose1 = () => setModalShow1(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowText(true);
+    }, 5000); // Show text after 5 seconds
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>
@@ -41,8 +86,13 @@ const MyComponent = () => {
           fluid
           className="d-flex justify-content-between align-items-center"
         >
-          <Navbar.Brand className="fs-1 fw-light">
+          <Navbar.Brand className="fs-1 fw-light space-x-8">
             <StyledSiAudimack />
+            {showText && (
+              <StyledTextContainer>
+                <StyledText className="font-bold">Audio Library</StyledText>
+              </StyledTextContainer>
+            )}
           </Navbar.Brand>
 
           <div className="d-flex justify-content-center space-x-24 flex-grow-1">
