@@ -55,7 +55,7 @@ $ npm run dev
 * The input has an autocomplete feature that is sanitized and also has lodash.debounce implemented to limit unnecessary requests to the server
 * If users click on a song name a youtube Iframe will appear
  
-<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/2bf9824b-7048-45b0-a3bd-af1469d55872" width="100%" height="100%">
+<img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/f179bc22-9829-4b23-bace-d33f2f0e4bd2" width="100%" height="100%">
 
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/bd29b89d-960e-4d1a-a2ac-2bfdeb09f74a" width="100%" height="100%">
 
