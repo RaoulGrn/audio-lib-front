@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import PasswordChecklist from "react-password-checklist";
 import styled from "styled-components";
@@ -13,6 +13,7 @@ const StyledModal = styled(Modal)`
 
 const StyledModalBody = styled(Modal.Body)`
   background-image: linear-gradient(#123524, #050f0a);
+
   padding: 2rem;
   border-radius: 20px;
 `;

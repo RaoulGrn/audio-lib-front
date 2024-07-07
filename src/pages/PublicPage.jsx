@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import LoginModal from "../components/LoginModal";
 import RegisterModal from "../components/RegisterModal";
-import { Link } from "react-router-dom";
-import { useAuthContext } from "../utils/AuthContext";
 import { SiAudiomack } from "react-icons/si";
 import styled from "styled-components";
-import { PiSignInThin } from "react-icons/pi";
 
 const StyledNavbar = styled(Navbar)`
   background-image: linear-gradient(#123524, #050f0a);
@@ -32,7 +29,6 @@ const StyledButton = styled(Button)`
 `;
 
 const MyComponent = () => {
-  const { logout } = useAuthContext();
   const [modalShow, setModalShow] = useState(false);
   const [modalShow1, setModalShow1] = useState(false);
   const handleClose = () => setModalShow(false);

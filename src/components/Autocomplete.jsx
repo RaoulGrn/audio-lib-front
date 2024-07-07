@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import debounce from "lodash.debounce";
@@ -42,7 +42,7 @@ const StyledSuggestionsList = styled.ul`
   list-style: none;
   font-size: 1.6rem;
   color: white;
-  background-color: #123524;
+  background-color: #0b160f;
   padding: 0;
   margin: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -55,7 +55,7 @@ const StyledSuggestionItem = styled.li`
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #0b160f;
+    background-color: #142b1d;
   }
 `;
 

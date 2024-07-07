@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import PasswordChecklist from "react-password-checklist";
 import axios from "axios";

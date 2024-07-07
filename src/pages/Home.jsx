@@ -152,18 +152,21 @@ function Home() {
             </TextContainer>
           )}
           {selectedData.type === "song" && (
-            <TextContainer3>
-              <Title1
-                onClick={() =>
-                  handleTrackClick(selectedData.title, selectedData.artist)
-                }
-                style={{ cursor: "pointer" }}
-              >
-                Track Name: {selectedData.title}
-              </Title1>
-              <Title2>Artist: {selectedData.artist}</Title2>
-              <Title3>Album: {selectedData.album}</Title3>
-              <p>Length: {selectedData.length}</p>
+            <TextContainer3 className=" w-100 ">
+              <TextContainer className="p-4 m-3">
+                <Title1
+                  className="border-bottom border-2 rounded-3xl border-gray-300 p-2"
+                  onClick={() =>
+                    handleTrackClick(selectedData.title, selectedData.artist)
+                  }
+                  style={{ cursor: "pointer" }}
+                >
+                  Track Name: {selectedData.title}
+                </Title1>
+                <Title2>Artist: {selectedData.artist}</Title2>
+                <Title3>Album: {selectedData.album}</Title3>
+                <p>Length: {selectedData.length}</p>
+              </TextContainer>
             </TextContainer3>
           )}
         </StyledContainer>
