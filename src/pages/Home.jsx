@@ -24,12 +24,30 @@ const TrackItem = styled.li`
   transition: background-color 0.1s ease;
   border-radius: 8px;
   text-align: center;
+  font-size: 1.4rem;
 
   &:hover {
     background-color: #0b160f;
     border-radius: 16px;
     padding: 8px;
   }
+`;
+
+const Title1 = styled.h2`
+  margin-top: 1.6rem;
+  font-size: 2.4rem;
+  margin-bottom: 1.6rem;
+`;
+
+const Title2 = styled.h3`
+  margin-top: 1.6rem;
+  font-size: 2rem;
+  margin-bottom: 1.6rem;
+`;
+const Title3 = styled.h4`
+  margin-top: 1.6rem;
+  font-size: 1.6rem;
+  margin-bottom: 1.6rem;
 `;
 
 const TextContainer = styled.div`
@@ -86,12 +104,12 @@ function Home() {
         <StyledContainer className="text-gray-300 fs-5">
           {selectedData.type === "artist" && (
             <TextContainer>
-              <h2>{selectedData.name}</h2>
+              <Title1>{selectedData.name}</Title1>
               <TextContainer2>
                 {selectedData.albums.map((album, index) => (
                   <div key={index}>
-                    <strong>Album: {album.title}</strong>
-                    <p>{album.description}</p>
+                    <Title2>Album: {album.title}</Title2>
+                    <Title3>{album.description}</Title3>
                     <TextContainer>
                       <TrackList>
                         {album.songs.map((song, idx) => (
@@ -113,9 +131,9 @@ function Home() {
           )}
           {selectedData.type === "album" && (
             <TextContainer>
-              <h2>Album: {selectedData.title}</h2>
-              <p>Artist: {selectedData.artist}</p>
-              <p>{selectedData.description}</p>
+              <Title1>Album: {selectedData.title}</Title1>
+              <Title2>Artist: {selectedData.artist}</Title2>
+              <Title3>{selectedData.description}</Title3>
               <TextContainer2>
                 <TrackList>
                   {selectedData.songs.map((song, index) => (
@@ -135,16 +153,16 @@ function Home() {
           )}
           {selectedData.type === "song" && (
             <TextContainer3>
-              <h2
+              <Title1
                 onClick={() =>
                   handleTrackClick(selectedData.title, selectedData.artist)
                 }
                 style={{ cursor: "pointer" }}
               >
                 Track Name: {selectedData.title}
-              </h2>
-              <p>Artist: {selectedData.artist}</p>
-              <p>Album: {selectedData.album}</p>
+              </Title1>
+              <Title2>Artist: {selectedData.artist}</Title2>
+              <Title3>Album: {selectedData.album}</Title3>
               <p>Length: {selectedData.length}</p>
             </TextContainer3>
           )}

@@ -22,7 +22,7 @@ const StyledNavLink = styled(NavLink)`
     font-weight: 500;
     padding: 1.2rem 2.4rem;
     transition: all 0.3s;
-    text-decoration: none; /* Ensure no underline */
+    text-decoration: none;
   }
 
   &:hover,

@@ -76,7 +76,7 @@ function Autocomplete({ onSelect }) {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { user, token } = useAuthContext();
+  const { token } = useAuthContext();
 
   const sanitizeInput = (input) => {
     return input.replace(/[^\w\s]/gi, "");
@@ -156,10 +156,6 @@ function Autocomplete({ onSelect }) {
     [token]
   );
 
-  useEffect(() => {
-    fetchSuggestions(query);
-  }, [query, fetchSuggestions, token]);
-
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
@@ -167,9 +163,9 @@ function Autocomplete({ onSelect }) {
   };
 
   const handleSuggestionClick = (suggestion) => {
-    setQuery(suggestion.name || suggestion.title);
-    setSuggestions([]);
     onSelect(suggestion);
+    setQuery("");
+    setSuggestions([]);
   };
 
   useEffect(() => {
