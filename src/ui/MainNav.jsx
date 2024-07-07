@@ -54,7 +54,7 @@ const LogoutButton = styled.button`
   align-items: center;
   gap: 1.2rem;
   width: 100%;
-  color: var(--color-grey-600);
+  color: var(--color-grey-700);
   font-size: 1.6rem;
   font-weight: 500;
   padding: 1.2rem 2.4rem;
