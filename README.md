@@ -53,7 +53,7 @@ $ npm run dev
 <img src="https://github.com/RaoulGrn/audio-lib-front/assets/108396853/5e4e933b-5216-4189-a1b7-5416e62b6e18" width="100%" height="100%">
 
 
-### Home Page - Where users can use the input to search for their preffered artists/album/songs.
+### Home Page - Where users can use the input to search for their preferred artists/album/songs.
 * The input has an autocomplete feature that is sanitized and also has lodash.debounce implemented to limit unnecessary requests to the server
 * If users click on a song title a youtube Iframe will appear and the browser will automatically focus on it
  
